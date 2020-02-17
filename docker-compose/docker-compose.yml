@@ -1,0 +1,50 @@
+version: "3.1"
+services:
+
+    mariadb-nosh:
+      image: mariadb
+      restart: unless-stopped
+      working_dir: /application
+      environment:
+        MYSQL_ROOT_PASSWORD: root_password
+        MYSQL_DATABASE: nosh_lite
+        MYSQL_USER: nosh_user
+        MYSQL_PASSWORD: nosh_password
+
+    webserver:
+      image: nginx:alpine
+      restart: always
+      working_dir: /var/www
+      volumes:
+        - nosh_public:/var/www/nosh-lite/public
+        - nosh_data:/var/www/nosh-lite/storage
+        - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      links:
+        - app-nosh
+      ports:
+        - 80:80
+
+    app-nosh:
+      image: shihjay2/nosh-lite:latest
+      working_dir: /var/www/nosh
+      restart: unless-stopped
+      volumes:
+        - ./php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+        - nosh_public:/var/www/nosh-lite/public
+        - nosh_data:/var/www/nosh-lite/storage
+        - ./:/var/www/nosh-lite/storage/app/public/zips
+        - ./env:/var/www/nosh-lite/.env
+      env_file: ./env
+      secrets:
+        - nosh_uri
+        - nosh_app_key
+
+secrets:
+    nosh_uri:
+      file: nosh_uri.txt
+    nosh_app_key:
+      file: ./.nosh_app_key
+
+volumes:
+    nosh_data:
+    nosh_public:
