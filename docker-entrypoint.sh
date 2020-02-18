@@ -37,7 +37,7 @@ if [ "$maxTries" -le 0 ]; then
   exit 1
 fi
 php artisan storage:link
-if ! [ -z "$SYNCTHING_HOST" ]; then
+if ! [ -z "${SYNCTHING_HOST}" ]; then
 	maxTries1=60
 	while [ "$maxTries1" -gt 0 ] && ! [ -f /var/syncthing/config/config.xml ]; do
 	  let maxTries1--
