@@ -14,6 +14,7 @@
 // Core routes
 Route::get('/', ['as' => 'patient', 'uses' => 'ChartController@patient']);
 Route::any('load_data', ['as' => 'load_data', 'uses' => 'CoreController@load_data']);
+Route::post('timer', ['as' => 'timer', 'uses' => 'CoreController@timer']);
 
 // Chart routes
 Route::get('alerts_list/{type}', ['as' => 'alerts_list', 'uses' => 'ChartController@alerts_list']);
@@ -48,6 +49,5 @@ Route::get('social_history', ['as' => 'social_history', 'uses' => 'ChartControll
 Route::get('supplements_list/{type}', ['as' => 'supplements_list', 'uses' => 'ChartController@supplements_list']);
 Route::get('t_messages_list', ['as' => 't_messages_list', 'uses' => 'ChartController@t_messages_list']);
 Route::any('t_message_view/{t_messages_id}', ['as' => 't_message_view', 'uses' => 'ChartController@t_message_view']);
-Route::post('timer', ['as' => 'timer', 'uses' => 'ChartController@timer']);
 Route::get('treedata', ['as' => 'treedata', 'uses' => 'ChartController@treedata']);
 Route::get('upload_ccda_view/{id}/{type}', ['as' => 'upload_ccda_view', 'uses' => 'ChartController@upload_ccda_view']);

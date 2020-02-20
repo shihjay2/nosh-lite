@@ -1962,23 +1962,6 @@ class ChartController extends Controller {
         return view('home', $data);
     }
 
-    public function timer(Request $request)
-    {
-        $return = '';
-        if (file_exists(base_path() . '/timer')) {
-            $min = File::get(base_path() . '/timer');
-            $type = 'warning';
-            if ($min > 30) {
-                $type = 'primary';
-            }
-            if ($min < 10) {
-                $type = 'danger';
-            }
-            $return = '<span class="badge badge-' . $type . '">' . $min  . 'minutes remaining</span>';
-        }
-        return $return;
-    }
-
     public function treedata(Request $request)
     {
         $oh = DB::table('other_history')->where('pid', '=', Session::get('pid'))->where('eid', '=', '0')->first();

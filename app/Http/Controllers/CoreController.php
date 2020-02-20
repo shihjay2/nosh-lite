@@ -81,4 +81,21 @@ class CoreController extends Controller
             return view('document_upload', $data);
         }
     }
+
+    public function timer(Request $request)
+    {
+        $return = '';
+        if (file_exists(base_path() . '/timer')) {
+            $min = File::get(base_path() . '/timer');
+            $type = 'warning';
+            if ($min > 30) {
+                $type = 'primary';
+            }
+            if ($min < 10) {
+                $type = 'danger';
+            }
+            $return = '<span class="badge badge-' . $type . '">' . $min  . 'minutes remaining</span>';
+        }
+        return $return;
+    }
 }
