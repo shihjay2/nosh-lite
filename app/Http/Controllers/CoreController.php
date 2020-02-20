@@ -57,7 +57,7 @@ class CoreController extends Controller
                 Session::put('pid', $pid);
                 if (! empty($sqlsearch)) {
                     foreach ($sqlsearch as $sqlfile) {
-                        $command = "mysql -u " . env('DB_USERNAME') . " -p". env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . $sqlfile;
+                        $command = "mysql -h " . env('DB_HOST') . " -u " . env('DB_USERNAME') . " -p". env('DB_PASSWORD') . " " . env('DB_DATABASE') . " < " . $sqlfile;
                         system($command);
                         unlink($sqlfile);
                     }
