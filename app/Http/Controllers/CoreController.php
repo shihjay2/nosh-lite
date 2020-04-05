@@ -94,7 +94,7 @@ class CoreController extends Controller
             if ($min < 10) {
                 $type = 'danger';
             }
-            $return = '<span class="badge badge-' . $type . '">' . $min  . 'minutes remaining</span>';
+            $return = '<span class="badge badge-' . $type . '">' . $min  . ' minutes remaining</span>';
         }
         return $return;
     }
